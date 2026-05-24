@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
 <style>
 :root{
   --green-deep:#04342C;--green-mid:#0F6E56;--green-med:#1D9E75;
@@ -133,6 +133,28 @@ body{font-family:var(--font-sans);background:var(--sand);color:var(--text);font-
 .edesc{font-size:13.5px;color:var(--text-muted);line-height:1.7}
 .extras-badge{display:inline-block;margin-top:.75rem;font-size:11px;background:#FAEEDA;color:#854F0B;padding:3px 12px;border-radius:99px;border:1px solid #FAC775;font-weight:500}
 
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.svc-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.4rem;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,transform .15s}
+.svc-card:hover{border-color:var(--green-light);transform:translateY(-2px)}
+.svc-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.svc-name{font-size:14px;font-weight:500;color:var(--green-deep)}
+.svc-price{font-family:var(--font-serif);font-size:1.3rem;font-weight:600;color:var(--green-med);white-space:nowrap}
+.svc-desc{font-size:12px;color:var(--text-muted);line-height:1.6}
+.svc-includes{list-style:none;padding:0;margin:4px 0 0}
+.svc-includes li{font-size:11.5px;color:var(--text-muted);padding:2px 0 2px 14px;position:relative;line-height:1.5}
+.svc-includes li::before{content:"·";position:absolute;left:4px;color:var(--green-med);font-weight:700}
+
+/* RULES */
+.rules-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem}
+.rules-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px}
+.rules-list li{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--text-muted);line-height:1.7}
+.rule-ico{width:28px;height:28px;border-radius:8px;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px}
+.rules-warning{margin-top:1.25rem;padding:1rem 1.25rem;background:#FEF3E2;border:1px solid #FAC775;border-radius:10px;display:flex;gap:12px;align-items:flex-start}
+.warn-ico{font-size:18px;flex-shrink:0;margin-top:1px}
+.warn-text{font-size:13px;color:#7A4100;line-height:1.6}
+.warn-text strong{color:#5C2E00}
+
 /* FOOTER */
 footer{background:var(--green-deep);color:rgba(255,255,255,.65);padding:2.5rem 1.5rem;text-align:center;font-size:13px;line-height:2}
 footer a{color:var(--green-light);text-decoration:none}
@@ -253,7 +275,7 @@ footer strong{color:#fff}
       </a>
       <div class="contact-item">
         <div class="c-ico">📍</div>
-        <div><span class="c-lbl" id="lbl-addr">Indirizzo</span><span class="c-val-plain">Via Mar Mediterraneo 1 · 08029 Siniscola (NU) · Sardegna</span></div>
+        <div><span class="c-lbl" id="lbl-addr">Indirizzo</span><span class="c-val-plain">Via Mar Mediterraneo 3 · 08029 Siniscola (NU) · Sardegna</span></div>
       </div>
     </div>
   </div>
@@ -273,7 +295,7 @@ footer strong{color:#fff}
     <div id="map-wrap"><div id="map"></div></div>
     <div class="map-legend" id="map-legend"></div>
     <div class="map-cta">
-      <a href="https://maps.google.com/?q=Via+Mar+Mediterraneo+1+Siniscola+08029" target="_blank" class="btn-primary" id="map-btn">Apri in Google Maps →</a>
+      <a href="https://maps.google.com/?q=40.58269,9.76161" target="_blank" class="btn-primary" id="map-btn">Apri in Google Maps →</a>
     </div>
   </div>
 </section>
@@ -292,9 +314,73 @@ footer strong{color:#fff}
   </div>
 </section>
 
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="sec-label">
+      <div class="sec-dot"></div>
+      <span class="sec-title" id="lbl-svc-sec">Servizi aggiuntivi</span>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-top">
+          <div class="svc-name" id="svc1-name">🧺 Lavatrice</div>
+          <div class="svc-price">€6</div>
+        </div>
+        <div class="svc-desc" id="svc1-desc">Utilizzo della lavatrice a carico.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-top">
+          <div class="svc-name" id="svc2-name">✨ Pulizia completa</div>
+          <div class="svc-price">€40</div>
+        </div>
+        <ul class="svc-includes" id="svc2-list">
+          <li>Cambio biancheria e asciugamani</li>
+          <li>Cambio torcione da cucina</li>
+          <li>Pulizia dei sanitari</li>
+          <li>Pulizia cucina (piatti e pentole esclusi)</li>
+          <li>Pulizia camera, soggiorno o seconda camera</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-top">
+          <div class="svc-name" id="svc3-name">🧹 Pulizia parziale</div>
+          <div class="svc-price">€30</div>
+        </div>
+        <ul class="svc-includes" id="svc3-list">
+          <li>Pulizia dei sanitari</li>
+          <li>Pulizia cucina</li>
+          <li>Pulizia camera, soggiorno o seconda camera</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOUSE RULES -->
+<section class="section" id="rules">
+  <div class="container">
+    <div class="sec-label">
+      <div class="sec-dot"></div>
+      <span class="sec-title" id="lbl-rules-sec">Regole della casa</span>
+    </div>
+    <div class="rules-card">
+      <ul class="rules-list" id="rules-list">
+        <li><div class="rule-ico">🏡</div><span id="rule1">Si prega di lasciare gli spazi nelle stesse condizioni in cui sono stati consegnati. Prendiamo cura di ogni dettaglio per voi — vi chiediamo la stessa attenzione.</span></li>
+        <li><div class="rule-ico">🛁</div><span id="rule2">Si prega di non utilizzare la biancheria e gli asciugamani con oli, creme solari, make-up o qualsiasi altro prodotto che ne possa compromettere l'integrità e il riutilizzo.</span></li>
+        <li><div class="rule-ico">🚭</div><span id="rule3">È vietato fumare all'interno delle camere e degli spazi comuni al chiuso.</span></li>
+      </ul>
+      <div class="rules-warning">
+        <div class="warn-ico">⚠️</div>
+        <div class="warn-text" id="rules-warn">Il mancato rispetto del regolamento potrà comportare l'applicazione di una <strong>penale compresa tra €50,00 e €600,00</strong>, a seconda della natura e dell'entità del danno.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <strong>Muriska · Sa Petra Ruja</strong><br>
-  Via Mar Mediterraneo 1 · 08029 Siniscola (NU) · Sardegna<br>
+  Via Mar Mediterraneo 3 · 08029 Siniscola (NU) · Sardegna<br>
   <a href="mailto:Domusmannas@gmail.com">Domusmannas@gmail.com</a> ·
   <a href="https://wa.me/393480807504">+39 348 080 7504</a><br>
   <span style="opacity:.4;font-size:11px;margin-top:.5rem;display:block">© 2025 Muriska · Tutti i diritti riservati</span>
@@ -317,47 +403,39 @@ const I = {
 };
 
 const activities = [
-  {id:0,emoji:"🏖",cat:"beach",lat:40.5857,lng:9.7651,color:"#1D9E75",img:I.act_kite,
+  {id:0,emoji:"🏖",cat:"beach",lat:40.5857,lng:9.7651,color:"#1D9E75",img:I.act_kite,gmaps:"https://maps.google.com/?q=Spiaggia+Sa+Petra+Ruja+Siniscola",
    name:{it:"Spiaggia Sa Petra Ruja",en:"Sa Petra Ruja Beach",de:"Strand Sa Petra Ruja",fr:"Plage Sa Petra Ruja"},
    desc:{it:"900m di sabbia bianca con pineta. Fondale basso, ideale per famiglie. ⭐ 4.6",en:"900m of white sand, pine forest. Shallow crystal waters. ⭐ 4.6",de:"900m weißer Sand, Pinienwald. Flaches Wasser. ⭐ 4.6",fr:"900m sable blanc, pinède. Eaux peu profondes. ⭐ 4.6"},
    badge:{it:"200m da noi",en:"200m away",de:"200m entfernt",fr:"À 200m"}},
-  {id:1,emoji:"🏄",cat:"sport",lat:40.5877,lng:9.7625,color:"#378ADD",img:I.act_kite2,
+  {id:1,emoji:"🏄",cat:"sport",lat:40.58769,lng:9.76242,color:"#378ADD",img:I.act_kite2,gmaps:"https://maps.google.com/?q=Kitesurf+La+Caletta+Siniscola",
    name:{it:"Kitesurf La Caletta",en:"Kitesurf La Caletta",de:"Kitesurf La Caletta",fr:"Kitesurf La Caletta"},
    desc:{it:"Scuola certificata, vento termico garantito ogni giorno. ⭐ 4.8",en:"Certified school, thermal wind guaranteed daily. ⭐ 4.8",de:"Zertifizierte Schule, thermischer Wind täglich. ⭐ 4.8",fr:"École certifiée, vent garanti quotidiennement. ⭐ 4.8"},
    badge:{it:"Sport acquatici",en:"Water sports",de:"Wassersport",fr:"Sports nautiques"}},
-  {id:2,emoji:"🚣",cat:"nature",lat:40.4610,lng:9.8016,color:"#5DCAA5",img:I.act_kayak,
+  {id:2,emoji:"🚣",cat:"nature",lat:40.45167,lng:9.79422,color:"#5DCAA5",img:I.act_kayak,gmaps:"https://maps.google.com/?q=Oasi+Biderosa+Siniscola",
    name:{it:"Oasi Biderosa - Kayak",en:"Biderosa Oasis - Kayak",de:"Biderosa Oase - Kajak",fr:"Oasis Biderosa - Kayak"},
    desc:{it:"Riserva naturale con 4 spiagge selvagge. Kayak, trekking e birdwatching. ~35 euro/persona. ⭐ 4.8",en:"Nature reserve, 4 wild beaches. Kayak, hiking, birdwatching. ~35 euros/person. ⭐ 4.8",de:"Naturschutzgebiet, 4 Strände. Kajak, Wandern. ~35 Euro/Person. ⭐ 4.8",fr:"Réserve naturelle, 4 plages. Kayak, randonnée. ~35€/pers. ⭐ 4.8"},
    badge:{it:"Natura",en:"Nature",de:"Natur",fr:"Nature"}},
-  {id:3,emoji:"⛵",cat:"sea",lat:40.6140,lng:9.7520,color:"#185FA5",img:I.act_boat,
+  {id:3,emoji:"⛵",cat:"sea",lat:40.614,lng:9.75178,color:"#185FA5",img:I.act_boat,gmaps:"https://maps.google.com/?q=Porto+La+Caletta+Siniscola",
    name:{it:"Porto La Caletta - Gite in barca",en:"La Caletta Port - Boat tours",de:"Hafen La Caletta - Bootsausflüge",fr:"Port La Caletta - Excursions"},
    desc:{it:"Golfo di Orosei, Cala Luna, Grotte del Bue Marino. Da 25 euro/persona. ⭐ 4.4",en:"Gulf of Orosei, Cala Luna, Bue Marino Caves. From 25 euros/person. ⭐ 4.4",de:"Golf von Orosei, Cala Luna, Höhlen. Ab 25 Euro/Person. ⭐ 4.4",fr:"Golfe d'Orosei, Cala Luna. À partir de 25€/pers. ⭐ 4.4"},
    badge:{it:"~2km da noi",en:"~2km away",de:"~2km entfernt",fr:"~2km de nous"}},
-  {id:4,emoji:"⛰",cat:"nature",lat:40.5719,lng:9.6416,color:"#5DCAA5",img:I.act_hiking,
+  {id:4,emoji:"⛰",cat:"nature",lat:40.53506,lng:9.58547,color:"#5DCAA5",img:I.act_hiking,gmaps:"https://maps.google.com/?q=Monte+Albo+Siniscola",
    name:{it:"Monte Albo - Trekking",en:"Monte Albo - Hiking",de:"Monte Albo - Wandern",fr:"Monte Albo - Randonnée"},
    desc:{it:"Sentieri tra flora endemica e paesaggi carsici. Vista fino all'isola di Tavolara. ⭐ 4.8",en:"Trails through endemic flora and karst scenery. Views to Tavolara island. ⭐ 4.8",de:"Wege durch endemische Flora, Karstlandschaft. Sicht bis Tavolara. ⭐ 4.8",fr:"Sentiers, flore endémique, paysage karstique. Vue sur Tavolara. ⭐ 4.8"},
    badge:{it:"Avventura",en:"Adventure",de:"Abenteuer",fr:"Aventure"}},
-  {id:5,emoji:"🏛",cat:"culture",lat:40.5822,lng:9.7779,color:"#EF9F27",img:I.act_tower,
+  {id:5,emoji:"🏛",cat:"culture",lat:40.58214,lng:9.77778,color:"#EF9F27",img:I.act_tower,gmaps:"https://maps.google.com/?q=Torre+Aragonese+Santa+Lucia+Siniscola",
    name:{it:"Torre Aragonese - Santa Lucia",en:"Aragonese Tower - Santa Lucia",de:"Aragonesischer Turm - Santa Lucia",fr:"Tour Aragonaise - Santa Lucia"},
    desc:{it:"Borgo di pescatori del XVI sec. a 2km. Torre storica, snorkeling, ristoranti. ⭐ 4.4",en:"16th century fishing village, 2km. Historic tower, snorkeling, seafood. ⭐ 4.4",de:"Fischerdorf, 16. Jh., 2km. Historischer Turm, Schnorcheln. ⭐ 4.4",fr:"Village de pêcheurs, XVIe s., 2km. Tour historique, snorkeling. ⭐ 4.4"},
    badge:{it:"2km da noi",en:"2km away",de:"2km entfernt",fr:"À 2km"}},
-  {id:6,emoji:"🪨",cat:"culture",lat:40.3181,lng:9.6065,color:"#EF9F27",img:I.act_cave,
+  {id:6,emoji:"🪨",cat:"culture",lat:40.31811,lng:9.60628,color:"#EF9F27",img:I.act_cave,gmaps:"https://maps.google.com/?q=Grotta+di+Ispinigoli+Dorgali",
    name:{it:"Grotta di Ispinigoli",en:"Ispinigoli Cave",de:"Höhle Ispinigoli",fr:"Grotte d'Ispinigoli"},
    desc:{it:"La colonna calcarea più alta d'Europa (37m). Tour guidati in italiano e inglese. ⭐ 4.6",en:"Europe's tallest limestone column (37m). Guided tours in Italian and English. ⭐ 4.6",de:"Europas höchste Kalksäule (37m). Führungen. ⭐ 4.6",fr:"La plus haute colonne calcaire d'Europe (37m). Visites guidées. ⭐ 4.6"},
    badge:{it:"Geologia",en:"Geology",de:"Geologie",fr:"Géologie"}},
-  {id:7,emoji:"🫕",cat:"food",lat:40.3797,lng:9.6937,color:"#D85A30",img:I.act_food,
-   name:{it:"Orosei AdvenTours - Esperienze",en:"Orosei AdvenTours - Experiences",de:"Orosei AdvenTours - Erlebnisse",fr:"Orosei AdvenTours - Expériences"},
-   desc:{it:"Laboratori di pasta fresca, pranzo con i pastori, degustazioni in vigna. ⭐ 5.0",en:"Fresh pasta workshops, lunch with shepherds, vineyard tastings. ⭐ 5.0",de:"Pasta-Workshops, Hirten-Mittagessen, Weinproben. ⭐ 5.0",fr:"Ateliers pâtes fraîches, déjeuner bergers, dégustations. ⭐ 5.0"},
-   badge:{it:"Esperienza",en:"Experience",de:"Erlebnis",fr:"Expérience"}},
-  {id:8,emoji:"🐟",cat:"sea",lat:40.6106,lng:9.7514,color:"#185FA5",img:I.act_fishing,
+  {id:8,emoji:"🐟",cat:"sea",lat:40.61058,lng:9.75136,color:"#185FA5",img:I.act_fishing,gmaps:"https://maps.google.com/?q=Pescaturismo+La+Caletta+Siniscola",
    name:{it:"Pescaturismo Su Ló",en:"Pescaturismo Su Ló",de:"Fischereitourismus Su Ló",fr:"Pêche-Tourisme Su Ló"},
    desc:{it:"Giornata in mare con pescatori locali. Pranzo a bordo incluso. ⭐ 4.8",en:"Day at sea with local fishermen. Lunch on board included. ⭐ 4.8",de:"Tag auf See mit Fischern. Mittagessen inklusive. ⭐ 4.8",fr:"Journée en mer avec pêcheurs locaux. Déjeuner à bord inclus. ⭐ 4.8"},
    badge:{it:"Tradizione",en:"Tradition",de:"Tradition",fr:"Tradition"}},
-  {id:9,emoji:"⛵",cat:"sea",lat:40.5857,lng:9.7651,color:"#0F6E56",img:I.muriska_mare,
-   name:{it:"Muriska Mare - Escursione",en:"Muriska Mare - Boat trip",de:"Muriska Mare - Bootsausflug",fr:"Muriska Mare - Excursion"},
-   desc:{it:"Esplora le acque cristalline di Sa Petra Ruja a bordo di una barca privata. Organizzata direttamente da noi.",en:"Explore the crystal waters of Sa Petra Ruja on a private boat. Organised directly by us.",de:"Erkunden Sie die Gewässer von Sa Petra Ruja auf einem Privatboot. Direkt von uns organisiert.",fr:"Explorez les eaux de Sa Petra Ruja en bateau privé. Organisé directement par nous."},
-   badge:{it:"Esclusiva Muriska",en:"Muriska exclusive",de:"Muriska exklusiv",fr:"Exclusif Muriska"}}
-];
+  ];
 
 const cats = [
   {id:"all",    label:{it:"Tutto",en:"All",de:"Alle",fr:"Tout"},color:"#888"},
@@ -392,7 +470,16 @@ const T = {
     edesc:"Decorazioni romantiche, cestini di prodotti tipici sardi, spesa a domicilio, pacchetti sport e molto altro. Disponibili da giugno, su prenotazione, alcuni giorni alla settimana.",
     ebadge:"Disponibile da giugno 2025",
     gl1:"Sa Petra Ruja \u00b7 a 200m", gl2:"Vista dall\u2019alto", gl3:"Il nostro mare",
-    navAbout:"Chi siamo", navAct:"Attivit\u00e0", navMap:"Mappa", navCont:"Contatti"
+    navAbout:"Chi siamo", navAct:"Attivit\u00e0", navMap:"Mappa", navCont:"Contatti",
+    svcsec:"Servizi aggiuntivi",
+    svc1name:"🧺 Lavatrice", svc1desc:"Utilizzo della lavatrice a carico.",
+    svc2name:"✨ Pulizia completa", svc2list:["Cambio biancheria e asciugamani","Cambio torcione da cucina","Pulizia dei sanitari","Pulizia cucina (piatti e pentole esclusi)","Pulizia camera, soggiorno o seconda camera"],
+    svc3name:"🧹 Pulizia parziale", svc3list:["Pulizia dei sanitari","Pulizia cucina","Pulizia camera, soggiorno o seconda camera"],
+    rulessec:"Regole della casa",
+    rule1:"Si prega di lasciare gli spazi nelle stesse condizioni in cui sono stati consegnati. Prendiamo cura di ogni dettaglio per voi — vi chiediamo la stessa attenzione.",
+    rule2:"Si prega di non utilizzare la biancheria e gli asciugamani con oli, creme solari, make-up o qualsiasi altro prodotto che ne possa compromettere l\u2019integrit\u00e0 e il riutilizzo.",
+    rule3:"È vietato fumare all\u2019interno delle camere e degli spazi comuni al chiuso.",
+    ruleswarn:"Il mancato rispetto del regolamento potr\u00e0 comportare l\u2019applicazione di una <strong>penale compresa tra \u20ac50,00 e \u20ac600,00<\/strong>, a seconda della natura e dell\u2019entit\u00e0 del danno."
   },
   en:{
     eyebrow:"Sardinia \u00b7 East coast",
@@ -416,7 +503,16 @@ const T = {
     edesc:"Romantic decorations, Sardinian local produce baskets, grocery delivery, sports packages and more. Available from June on request, select days of the week.",
     ebadge:"Available from June 2025",
     gl1:"Sa Petra Ruja \u00b7 200m away", gl2:"Aerial view", gl3:"Our sea",
-    navAbout:"About us", navAct:"Activities", navMap:"Map", navCont:"Contacts"
+    navAbout:"About us", navAct:"Activities", navMap:"Map", navCont:"Contacts",
+    svcsec:"Additional services",
+    svc1name:"🧺 Washing machine", svc1desc:"Use of the washing machine per load.",
+    svc2name:"✨ Full cleaning", svc2list:["Change of bed linen and towels","Change of kitchen cloth","Bathroom cleaning","Kitchen cleaning (dishes and pots excluded)","Bedroom, living room or second bedroom cleaning"],
+    svc3name:"🧹 Partial cleaning", svc3list:["Bathroom cleaning","Kitchen cleaning","Bedroom, living room or second bedroom cleaning"],
+    rulessec:"House rules",
+    rule1:"Please leave the property in the same condition as when it was handed over. We take care of every detail for you — we ask for the same care in return.",
+    rule2:"Please do not use bed linen or towels with oils, sunscreen, make-up or any other product that may compromise their integrity and reuse.",
+    rule3:"Smoking is strictly prohibited inside the rooms and enclosed common areas.",
+    ruleswarn:"Failure to comply with the house rules may result in a <strong>penalty ranging from \u20ac50.00 to \u20ac600.00<\/strong>, depending on the nature and extent of the damage."
   },
   de:{
     eyebrow:"Sardinien \u00b7 Ostk\u00fcste",
@@ -440,7 +536,16 @@ const T = {
     edesc:"Romantische Dekorationen, sardische Produkte, Lebensmittellieferung, Sportpakete und mehr. Ab Juni buchbar, an ausgew\u00e4hlten Wochentagen.",
     ebadge:"Ab Juni 2025 verf\u00fcgbar",
     gl1:"Sa Petra Ruja \u00b7 200m entfernt", gl2:"Luftaufnahme", gl3:"Unser Meer",
-    navAbout:"\u00dcber uns", navAct:"Aktivit\u00e4ten", navMap:"Karte", navCont:"Kontakt"
+    navAbout:"\u00dcber uns", navAct:"Aktivit\u00e4ten", navMap:"Karte", navCont:"Kontakt",
+    svcsec:"Zus\u00e4tzliche Dienstleistungen",
+    svc1name:"🧺 Waschmaschine", svc1desc:"Nutzung der Waschmaschine pro Ladung.",
+    svc2name:"✨ Vollreinigung", svc2list:["Wechsel von Bettw\u00e4sche und Handt\u00fcchern","Wechsel des K\u00fcchentuchs","Badreinigung","K\u00fcchenreinigung (Geschirr und T\u00f6pfe ausgeschlossen)","Reinigung von Schlafzimmer, Wohnzimmer oder zweitem Schlafzimmer"],
+    svc3name:"🧹 Teilreinigung", svc3list:["Badreinigung","K\u00fcchenreinigung","Reinigung von Schlafzimmer, Wohnzimmer oder zweitem Schlafzimmer"],
+    rulessec:"Hausordnung",
+    rule1:"Bitte hinterlassen Sie die Unterkunft in demselben Zustand, in dem sie \u00fcbergeben wurde. Wir k\u00fcmmern uns um jedes Detail f\u00fcr Sie — wir bitten Sie um dieselbe Sorgfalt.",
+    rule2:"Bitte verwenden Sie Bettw\u00e4sche und Handt\u00fccher nicht mit \u00d6len, Sonnencreme, Make-up oder anderen Produkten, die deren Unversehrtheit und Wiederverwendung beeintr\u00e4chtigen k\u00f6nnten.",
+    rule3:"Das Rauchen in den Zimmern und geschlossenen Gemeinschaftsbereichen ist strengstens untersagt.",
+    ruleswarn:"Bei Nichteinhaltung der Hausordnung kann eine <strong>Vertragsstrafe zwischen 50,00\u00a0\u20ac und 600,00\u00a0\u20ac<\/strong> erhoben werden, je nach Art und Ausma\u00df des Schadens."
   },
   fr:{
     eyebrow:"Sardaigne \u00b7 C\u00f4te orientale",
@@ -464,7 +569,16 @@ const T = {
     edesc:"D\u00e9corations romantiques, paniers de produits sardes, courses \u00e0 domicile, forfaits sportifs et plus. Disponibles \u00e0 partir de juin sur r\u00e9servation.",
     ebadge:"Disponible d\u00e8s juin 2025",
     gl1:"Sa Petra Ruja \u00b7 \u00e0 200m", gl2:"Vue a\u00e9rienne", gl3:"Notre mer",
-    navAbout:"Qui sommes-nous", navAct:"Activit\u00e9s", navMap:"Carte", navCont:"Contacts"
+    navAbout:"Qui sommes-nous", navAct:"Activit\u00e9s", navMap:"Carte", navCont:"Contacts",
+    svcsec:"Services suppl\u00e9mentaires",
+    svc1name:"🧺 Machine \u00e0 laver", svc1desc:"Utilisation de la machine \u00e0 laver par chargement.",
+    svc2name:"✨ Nettoyage complet", svc2list:["Changement du linge de lit et des serviettes","Changement du torchon de cuisine","Nettoyage de la salle de bain","Nettoyage de la cuisine (vaisselle et casseroles exclues)","Nettoyage de la chambre, du s\u00e9jour ou de la deuxi\u00e8me chambre"],
+    svc3name:"🧹 Nettoyage partiel", svc3list:["Nettoyage de la salle de bain","Nettoyage de la cuisine","Nettoyage de la chambre, du s\u00e9jour ou de la deuxi\u00e8me chambre"],
+    rulessec:"R\u00e8glement int\u00e9rieur",
+    rule1:"Nous vous prions de laisser le logement dans le m\u00eame \u00e9tat qu\u2019\u00e0 votre arriv\u00e9e. Nous prenons soin de chaque d\u00e9tail pour vous — nous vous demandons la m\u00eame attention.",
+    rule2:"Nous vous prions de ne pas utiliser le linge de lit ou les serviettes avec des huiles, de la cr\u00e8me solaire, du maquillage ou tout autre produit susceptible d\u2019en compromettre l\u2019int\u00e9grit\u00e9 et la r\u00e9utilisation.",
+    rule3:"Il est strictement interdit de fumer dans les chambres et les espaces communs ferm\u00e9s.",
+    ruleswarn:"Le non-respect du r\u00e8glement pourra entra\u00eener l\u2019application d\u2019une <strong>p\u00e9nalit\u00e9 comprise entre 50,00\u00a0\u20ac et 600,00\u00a0\u20ac<\/strong>, selon la nature et l\u2019\u00e9tendue du pr\u00e9judice."
   }
 };
 
@@ -503,6 +617,19 @@ function setLang(l) {
   document.getElementById("gl1").textContent = t.gl1; document.getElementById("gl2").textContent = t.gl2; document.getElementById("gl3").textContent = t.gl3;
   document.getElementById("nav-about").textContent = t.navAbout; document.getElementById("nav-act").textContent = t.navAct;
   document.getElementById("nav-map").textContent = t.navMap;     document.getElementById("nav-cont").textContent = t.navCont;
+  // Services
+  document.getElementById("lbl-svc-sec").textContent = t.svcsec;
+  document.getElementById("svc1-name").textContent = t.svc1name; document.getElementById("svc1-desc").textContent = t.svc1desc;
+  document.getElementById("svc2-name").textContent = t.svc2name;
+  document.getElementById("svc2-list").innerHTML = t.svc2list.map(function(i){return "<li>"+i+"</li>";}).join("");
+  document.getElementById("svc3-name").textContent = t.svc3name;
+  document.getElementById("svc3-list").innerHTML = t.svc3list.map(function(i){return "<li>"+i+"</li>";}).join("");
+  // Rules
+  document.getElementById("lbl-rules-sec").textContent = t.rulessec;
+  document.getElementById("rule1").textContent = t.rule1;
+  document.getElementById("rule2").textContent = t.rule2;
+  document.getElementById("rule3").textContent = t.rule3;
+  document.getElementById("rules-warn").innerHTML = t.ruleswarn;
   renderCats(); renderActivities(); renderLegend();
 }
 
@@ -518,7 +645,7 @@ function setCat(c) { activeCat = c; renderCats(); renderActivities(); updateMark
 function renderActivities() {
   var list = activeCat === "all" ? activities : activities.filter(function(a) { return a.cat === activeCat; });
   document.getElementById("act-grid").innerHTML = list.map(function(a) {
-    return '<div class="act-card" onclick="focusMarker(' + a.id + ')">'
+    return '<div class="act-card" onclick="focusMarker(' + a.id + ')" title="Apri in Google Maps">'
       + '<div class="act-img"><img src="' + a.img + '" alt="" loading="lazy"\/>'
       + '<div class="act-emoji-bg">' + a.emoji + "<\/div><\/div>"
       + '<div class="act-body">'
@@ -538,12 +665,19 @@ function renderLegend() {
 }
 
 function initMap() {
-  map = L.map("map", {zoomControl: true, scrollWheelZoom: false}).setView([40.52, 9.72], 10);
+  map = L.map("map", {zoomControl: true, scrollWheelZoom: false}).setView([40.58269, 9.76161], 13);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: "\u00a9 OpenStreetMap", maxZoom: 18}).addTo(map);
+  // Fix default icon paths (broken when loaded from CDN)
+  delete L.Icon.Default.prototype._getIconUrl;
+  L.Icon.Default.mergeOptions({iconUrl:"",shadowUrl:"",iconRetinaUrl:""});
   var homeHtml = '<div style="width:36px;height:36px;background:#04342C;border-radius:50%;border:3px solid #fff;'
     + 'box-shadow:0 3px 10px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-size:17px">\ud83c\udfe1<\/div>';
-  L.marker([40.5880, 9.7645], {icon: L.divIcon({html: homeHtml, className: "", iconSize: [36,36], iconAnchor: [18,18]})})
-    .addTo(map).bindPopup("<b>Muriska<\/b><br><small>Via Mar Mediterraneo 1, Siniscola<\/small>");
+  L.marker([40.58269, 9.76161], {icon: L.divIcon({html: homeHtml, className: "", iconSize: [36,36], iconAnchor: [18,18]})})
+    .addTo(map).bindPopup("<b>Muriska<\/b><br><small>Via Mar Mediterraneo 3, Sa Petra Ruja<\/small>");
+  // Parking marker
+  var parkHtml = '<div style="width:34px;height:34px;background:#378ADD;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:16px">🅿️</div>';
+  L.marker([40.58289, 9.76131], {icon: L.divIcon({html: parkHtml, className: "", iconSize: [34,34], iconAnchor: [17,17]})})
+    .addTo(map).bindPopup("<b>Parcheggio gratuito<\/b><br><small>Via Mar Adriatico<\/small>");
   activities.forEach(function(a) {
     var icoHtml = '<div style="width:36px;height:36px;background:' + a.color
       + ';border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25);'
@@ -551,7 +685,8 @@ function initMap() {
     var m = L.marker([a.lat, a.lng], {icon: L.divIcon({html: icoHtml, className: "", iconSize: [36,36], iconAnchor: [18,18]})}).addTo(map);
     (function(marker, act) {
       marker.on("click", function() {
-        marker.bindPopup("<b>" + act.name[lang] + "<\/b><br><small>" + act.badge[lang] + "<\/small>").openPopup();
+        if (act.gmaps) { window.open(act.gmaps, "_blank"); }
+        else { marker.bindPopup("<b>" + act.name[lang] + "<\/b><br><small>" + act.badge[lang] + "<\/small>").openPopup(); }
       });
     })(m, a);
     markers.push({id: a.id, cat: a.cat, marker: m});
@@ -564,8 +699,9 @@ function focusMarker(id) {
   if (!entry || !a) return;
   map.flyTo([a.lat, a.lng], 13, {duration: 1.2});
   setTimeout(function() {
-    entry.marker.bindPopup("<b>" + a.name[lang] + "<\/b><br><small>" + a.badge[lang] + "<\/small>").openPopup();
-  }, 1100);
+    if (a.gmaps) { window.open(a.gmaps, "_blank"); }
+    else { entry.marker.bindPopup("<b>" + a.name[lang] + "<\/b><br><small>" + a.badge[lang] + "<\/small>").openPopup(); }
+  }, 600);
   document.getElementById("map-section").scrollIntoView({behavior: "smooth", block: "start"});
 }
 
@@ -592,7 +728,7 @@ function leafletFailed() {
     '<div style="display:flex;align-items:center;justify-content:center;height:100%;'
     + 'background:var(--green-pale);border-radius:14px;font-size:14px;color:var(--green-mid);padding:2rem;text-align:center">'
     + '<div><div style="font-size:2rem;margin-bottom:.5rem">📍</div>'
-    + 'Apri la mappa su <a href="https://maps.google.com/?q=Via+Mar+Mediterraneo+1+Siniscola+08029" '
+    + 'Apri la mappa su <a href="https://maps.google.com/?q=40.58269,9.76161" '
     + 'target="_blank" style="color:var(--green-mid)">Google Maps</a></div></div>';
 }
 
@@ -610,6 +746,6 @@ function boot() {
 window.addEventListener("DOMContentLoaded", boot);
 
 </script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" onload="leafletReady()" onerror="leafletFailed()"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js" onload="leafletReady()" onerror="leafletFailed()"></script>
 </body>
 </html>
